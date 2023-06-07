@@ -1,5 +1,7 @@
-package com.alura.modelo;
+package com.alura.domain.usuario;
 
+import com.alura.domain.respuesta.Respuesta;
+import com.alura.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,9 +24,19 @@ public class Usuario {
 	private String email;
 	private String contrasena;
 
-	@OneToMany
+	@OneToMany(mappedBy = "autor")
 	private List<Topico> topicos = new ArrayList<>();
 	@OneToMany
 	private List<Respuesta> respuestas = new ArrayList<>();
+
+	public Usuario(DatosRegistroUsuario datosRegistroUsuario){
+		this.nombre=datosRegistroUsuario.nombre();
+		this.email=datosRegistroUsuario.email();
+		this.contrasena=datosRegistroUsuario.contrasena();
+	}
+
+	public void agregarTopico(Topico topico){
+		topicos.add(topico);
+	}
 
 }

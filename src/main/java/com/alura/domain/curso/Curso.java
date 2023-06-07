@@ -1,5 +1,6 @@
-package com.alura.modelo;
+package com.alura.domain.curso;
 
+import com.alura.domain.topico.Topico;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -22,7 +23,7 @@ public class Curso {
 	@Enumerated(EnumType.STRING)
 	private CategoriasCurso categoria;
 
-	@OneToMany
+	@OneToMany(mappedBy = "curso")
 	private List<Topico> topicos = new ArrayList<>();
 
 	public Curso(String nombre, CategoriasCurso categoria) {
@@ -30,4 +31,12 @@ public class Curso {
 		this.categoria = categoria;
 	}
 
+	public Curso(DatosRegistroCurso datosRegistroCurso) {
+		this.nombre=datosRegistroCurso.nombre();
+		this.categoria=datosRegistroCurso.categoria();
+	}
+
+	public void agregarTopico(Topico topico){
+		topicos.add(topico);
+	}
 }

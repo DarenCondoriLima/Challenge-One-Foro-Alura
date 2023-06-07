@@ -1,4 +1,4 @@
--- V1__create_tables.sql
+-- V1__create-tables.sql
 
 -- Creación de la tabla usuarios
 CREATE TABLE usuarios (
@@ -18,8 +18,8 @@ CREATE TABLE cursos (
 -- Creación de la tabla topicos
 CREATE TABLE topicos (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  titulo VARCHAR(150) NOT NULL,
-  mensaje VARCHAR(800) NOT NULL,
+  titulo VARCHAR(150) NOT NULL unique,
+  mensaje VARCHAR(255) NOT NULL unique,
   fecha_creacion DATETIME NOT NULL,
   status VARCHAR(255) NOT NULL,
   autor_id BIGINT,
@@ -35,7 +35,7 @@ CREATE TABLE topicos (
 -- Creación de la tabla respuestas
 CREATE TABLE respuestas (
   id BIGINT PRIMARY KEY AUTO_INCREMENT,
-  mensaje VARCHAR(800) NOT NULL,
+  mensaje VARCHAR(255) NOT NULL unique,
   topico_id BIGINT NOT NULL,
   fecha_creacion DATETIME NOT NULL,
   autor_id BIGINT,

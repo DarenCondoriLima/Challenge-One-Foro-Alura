@@ -1,7 +1,13 @@
-package com.alura.modelo;
+package com.alura.domain.topico;
 
+import com.alura.domain.curso.Curso;
+import com.alura.domain.curso.CursoRepository;
+import com.alura.domain.respuesta.Respuesta;
+import com.alura.domain.usuario.Usuario;
+import com.alura.domain.usuario.UsuarioRepository;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -36,4 +42,10 @@ public class Topico {
 		this.curso = curso;
 	}
 
+	public Topico(DatosRegistroTopico datosRegistroTopico,Usuario usuario,Curso curso) {
+		this.titulo=datosRegistroTopico.titulo();
+		this.mensaje=datosRegistroTopico.mensaje();
+		this.autor=usuario;
+		this.curso=curso;
+	}
 }

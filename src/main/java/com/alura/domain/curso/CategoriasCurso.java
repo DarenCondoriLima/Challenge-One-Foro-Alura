@@ -1,4 +1,4 @@
-package com.alura.modelo;
+package com.alura.domain.curso;
 
 public enum CategoriasCurso {
     Todas_las_categorías,
