@@ -28,12 +28,13 @@ public class Topico {
 	private String titulo;
 	private String mensaje;
 	private LocalDateTime fechaCreacion = LocalDateTime.now();
+	@Enumerated(EnumType.STRING)
 	private StatusTopico status = StatusTopico.NO_RESPONDIDO;
 	@ManyToOne
 	private Usuario autor;
 	@ManyToOne
 	private Curso curso;
-	@OneToMany
+	@OneToMany(mappedBy = "topico")
 	private List<Respuesta> respuestas = new ArrayList<>();
 
 	public Topico(String titulo, String mensaje, Curso curso) {
@@ -47,5 +48,17 @@ public class Topico {
 		this.mensaje=datosRegistroTopico.mensaje();
 		this.autor=usuario;
 		this.curso=curso;
+	}
+
+	public void actualizarDatos(DatosActualizarTopico datosActualizarTopico,Curso curso) {
+	if(datosActualizarTopico.titulo()!=null){
+		this.titulo= datosActualizarTopico.titulo();
+	}
+	if (datosActualizarTopico.mensaje()!=null){
+		this.mensaje= datosActualizarTopico.mensaje();
+	}
+	if(datosActualizarTopico.curso()!=null){
+		this.curso= curso;
+	}
 	}
 }
