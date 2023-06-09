@@ -1,9 +1,7 @@
 package com.alura.domain.topico;
 
-import com.alura.domain.curso.Curso;
 import com.alura.domain.curso.DatosRespuestaCurso;
 import com.alura.domain.usuario.DatosRespuestaUsuario;
-import com.alura.domain.usuario.Usuario;
 
 import java.time.LocalDateTime;
 

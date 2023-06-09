@@ -27,4 +27,15 @@ public class Respuesta {
 	private Usuario autor;
 	private Boolean solucion = false;
 
+	public Respuesta(DatosRegistroRespuesta datosRegistroRespuesta, Topico topico, Usuario autor) {
+		this.mensaje=datosRegistroRespuesta.mensaje();
+		this.topico=topico;
+		this.autor = autor;
+	}
+
+	public void actualizarRespuesta(DatosActualizarRespuesta datosActualizarRespuesta) {
+		if (datosActualizarRespuesta.mensaje()!=null){
+			this.mensaje= datosActualizarRespuesta.mensaje();
+		}
+	}
 }

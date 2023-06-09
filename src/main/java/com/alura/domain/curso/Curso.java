@@ -39,4 +39,13 @@ public class Curso {
 	public void agregarTopico(Topico topico){
 		topicos.add(topico);
 	}
+
+	public void actualizarCurso(DatosActualizarCurso datosActualizarCurso) {
+		if(datosActualizarCurso.nombre()!=null){
+			this.nombre=datosActualizarCurso.nombre();
+		}
+		if (datosActualizarCurso.categoria()!=null){
+			this.categoria=datosActualizarCurso.categoria();
+		}
+	}
 }

@@ -26,17 +26,39 @@ public class Usuario {
 
 	@OneToMany(mappedBy = "autor")
 	private List<Topico> topicos = new ArrayList<>();
-	@OneToMany
+	@OneToMany(mappedBy = "autor")
 	private List<Respuesta> respuestas = new ArrayList<>();
 
 	public Usuario(DatosRegistroUsuario datosRegistroUsuario){
-		this.nombre=datosRegistroUsuario.nombre();
-		this.email=datosRegistroUsuario.email();
-		this.contrasena=datosRegistroUsuario.contrasena();
+		this.nombre= datosRegistroUsuario.nombre();
+		this.email= datosRegistroUsuario.email();
+		this.contrasena= datosRegistroUsuario.contrasena();
+	}
+
+
+
+	public void actualizarUsuario(DatosActualizarUsuario datosActualizarUsuario) {
+		if (datosActualizarUsuario.nombre()!=null){
+			this.nombre= datosActualizarUsuario.nombre();
+		}
+		if (datosActualizarUsuario.email()!=null){
+			this.email= datosActualizarUsuario.email();
+		}
 	}
 
 	public void agregarTopico(Topico topico){
-		topicos.add(topico);
+		this.topicos.add(topico);
 	}
 
+	public void agregarRespuesta(Respuesta respuesta) {
+		this.respuestas.add(respuesta);
+	}
+
+	public void actualizarContrasena(DatosActualizarContrasena datosActualizarContrasena) {
+		if (datosActualizarContrasena.contrasenaActual().equals(this.contrasena)){
+			this.contrasena=datosActualizarContrasena.contrasenaNueva();
+		}else {
+			System.out.println("Las contraseñas no coinciden");
+		}
+	}
 }

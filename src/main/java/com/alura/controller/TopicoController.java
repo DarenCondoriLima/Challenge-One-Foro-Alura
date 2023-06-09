@@ -2,7 +2,6 @@ package com.alura.controller;
 
 import com.alura.domain.curso.Curso;
 import com.alura.domain.curso.CursoRepository;
-import com.alura.domain.curso.DatosRespuestaCurso;
 import com.alura.domain.topico.*;
 import com.alura.domain.usuario.Usuario;
 import com.alura.domain.usuario.UsuarioRepository;
@@ -33,7 +32,7 @@ public class TopicoController {
                                                                UriComponentsBuilder uriComponentsBuilder){
         Usuario usuario = usuarioRepository.getReferenceById(datosRegistroTopico.autor());
         Curso curso = cursoRepository.getReferenceById(datosRegistroTopico.curso());
-        Topico topico= topicoRepository.save(new Topico(datosRegistroTopico,usuario,curso));
+        Topico topico= topicoRepository.save(new Topico(datosRegistroTopico, usuario,curso));
         usuario.agregarTopico(topico);
         curso.agregarTopico(topico);
         URI url= uriComponentsBuilder.path("/topicos/{id}").buildAndExpand(topico.getId()).toUri();
@@ -47,7 +46,7 @@ public class TopicoController {
 
     @GetMapping
     public ResponseEntity<Page<DatosRespuestaTopico>> listadoTopicos(@PageableDefault(size = 10) Pageable paginacion){
-        return ResponseEntity.ok((Page<DatosRespuestaTopico>) topicoRepository.findAll(paginacion).map(DatosRespuestaTopico::new));
+        return ResponseEntity.ok(topicoRepository.findAll(paginacion).map(DatosRespuestaTopico::new));
     }
 
     @PutMapping("/{id}")
