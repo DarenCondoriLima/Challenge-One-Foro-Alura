@@ -22,11 +22,11 @@ import java.net.URI;
 public class TopicoController {
 
     @Autowired
-    TopicoRepository topicoRepository;
+    private TopicoRepository topicoRepository;
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
     @Autowired
-    CursoRepository cursoRepository;
+    private CursoRepository cursoRepository;
     @PostMapping
     public ResponseEntity<DatosRespuestaTopico> registroTopico(@RequestBody @Valid DatosRegistroTopico datosRegistroTopico,
                                                                UriComponentsBuilder uriComponentsBuilder){

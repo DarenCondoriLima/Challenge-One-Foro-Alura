@@ -21,13 +21,13 @@ import java.net.URI;
 public class RespuestaController {
 
     @Autowired
-    RespuestaRepository respuestaRepository;
+    private RespuestaRepository respuestaRepository;
 
     @Autowired
-    TopicoRepository topicoRepository;
+    private TopicoRepository topicoRepository;
 
     @Autowired
-    UsuarioRepository usuarioRepository;
+    private UsuarioRepository usuarioRepository;
 
     @PostMapping
     public ResponseEntity<DatosRespuesta> registroRespuesta(@RequestBody @Valid DatosRegistroRespuesta datosRegistroRespuesta

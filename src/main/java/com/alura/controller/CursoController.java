@@ -17,7 +17,7 @@ import java.net.URI;
 public class CursoController {
 
     @Autowired
-    CursoRepository cursoRepository;
+    private CursoRepository cursoRepository;
 
     @PostMapping
     public ResponseEntity<DatosRespuestaCurso> registroCurso(@RequestBody @Valid DatosRegistroCurso datosRegistroCurso,
