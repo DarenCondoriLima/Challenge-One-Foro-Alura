@@ -27,6 +27,7 @@ public class Usuario implements UserDetails {
 	private String nombre;
 	private String email;
 	private String contrasena;
+	private Boolean administrador=false;
 
 	@OneToMany(mappedBy = "autor")
 	private List<Topico> topicos = new ArrayList<>();
@@ -68,9 +69,16 @@ public class Usuario implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-	}
+		List<GrantedAuthority> authorities = new ArrayList<>();
 
+		if (administrador) {
+			authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
+		} else {
+			authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+		}
+
+		return authorities;
+	}
 	@Override
 	public String getPassword() {
 		return this.contrasena;

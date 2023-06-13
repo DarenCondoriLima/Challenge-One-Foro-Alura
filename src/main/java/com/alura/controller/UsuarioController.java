@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -60,6 +62,15 @@ public class UsuarioController {
         Usuario usuario = usuarioRepository.getReferenceById(id);
         usuarioRepository.delete(usuario);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping("/setAdmin/{id}")
+    @Transactional
+    @Secured("ROLE_ADMIN")
+    public ResponseEntity<DatosRespuestaUsuario> setAdmin(@PathVariable Long id){
+    Usuario usuario= usuarioRepository.getReferenceById(id);
+    usuario.setAdministrador(true);
+    return ResponseEntity.ok(new DatosRespuestaUsuario(usuario));
     }
 
 }

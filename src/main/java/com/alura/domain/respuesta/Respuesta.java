@@ -20,10 +20,10 @@ public class Respuesta {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 	private String mensaje;
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Topico topico;
 	private LocalDateTime fechaCreacion = LocalDateTime.now();
-	@ManyToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	private Usuario autor;
 	private Boolean solucion = false;
 
