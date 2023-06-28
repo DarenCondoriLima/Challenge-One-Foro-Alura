@@ -7,9 +7,9 @@ public record DatosRegistroRespuesta(
         @NotBlank
         String mensaje,
         @NotNull
-        Long topico,
+        Long topicoID,
         @NotNull
-        Long autor
+        Long autorID
 
 ) {
 }

@@ -1,6 +1,7 @@
 package com.alura.controller;
 
 import com.alura.domain.curso.*;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,7 @@ public class CursoController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DatosRespuestaCurso>> listarCursos(Pageable pageable){
+    public ResponseEntity<Page<DatosRespuestaCurso>> listarCursos(@Parameter(hidden = true) Pageable pageable){
         return ResponseEntity.ok(cursoRepository.findAll(pageable).map(DatosRespuestaCurso::new));
     }
 

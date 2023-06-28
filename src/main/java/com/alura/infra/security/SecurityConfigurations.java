@@ -28,14 +28,15 @@ public class SecurityConfigurations {
         return httpSecurity.csrf(csrf -> csrf.disable())
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
                 .and().authorizeRequests()
-                .requestMatchers(HttpMethod.POST,"/login")
-                .permitAll()
-                .anyRequest()
-                .authenticated()
+                    .requestMatchers(HttpMethod.POST,"/login").permitAll()
+                    .requestMatchers(HttpMethod.POST,"/usuarios").permitAll()
+                    .requestMatchers("/v3/api-docs/**", "/documentacion/swagger-ui/**").permitAll()
+                    .anyRequest().authenticated()
                 .and()
                 .addFilterBefore(securityFilter , UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
+
     @Bean
     public AuthenticationManager authenticationManager(AuthenticationConfiguration authenticationConfiguration)
             throws Exception {

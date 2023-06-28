@@ -1,6 +1,7 @@
 package com.alura.controller;
 
 import com.alura.domain.usuario.*;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +9,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -35,7 +35,7 @@ public class UsuarioController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DatosRespuestaUsuario>> listarUsuarios(Pageable pageable){
+    public ResponseEntity<Page<DatosRespuestaUsuario>> listarUsuarios(@Parameter(hidden = true) Pageable pageable){
         return ResponseEntity.ok(usuarioRepository.findAll(pageable).map(DatosRespuestaUsuario:: new));
     }
 

@@ -9,7 +9,7 @@ public record DatosRegistroTopico(
     @NotBlank
     String mensaje,
     @NotNull
-    Long autor,
+    Long autorID,
     @NotNull
-    Long curso
+    Long cursoID
 ){}

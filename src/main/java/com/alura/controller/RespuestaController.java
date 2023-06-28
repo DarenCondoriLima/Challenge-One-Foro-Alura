@@ -5,6 +5,7 @@ import com.alura.domain.topico.Topico;
 import com.alura.domain.topico.TopicoRepository;
 import com.alura.domain.usuario.Usuario;
 import com.alura.domain.usuario.UsuarioRepository;
+import io.swagger.v3.oas.annotations.Parameter;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.annotation.Secured;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -34,8 +34,8 @@ public class RespuestaController {
     @PostMapping
     public ResponseEntity<DatosRespuesta> registroRespuesta(@RequestBody @Valid DatosRegistroRespuesta datosRegistroRespuesta
             , UriComponentsBuilder uriComponentsBuilder){
-        Topico topico= topicoRepository.getReferenceById(datosRegistroRespuesta.topico());
-        Usuario usuario = usuarioRepository.getReferenceById(datosRegistroRespuesta.autor());
+        Topico topico= topicoRepository.getReferenceById(datosRegistroRespuesta.topicoID());
+        Usuario usuario = usuarioRepository.getReferenceById(datosRegistroRespuesta.autorID());
         Respuesta respuesta= respuestaRepository.save(new Respuesta(datosRegistroRespuesta,topico, usuario));
         topico.agregarRespuesta(respuesta);
         usuario.agregarRespuesta(respuesta);
@@ -49,7 +49,7 @@ public class RespuestaController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<DatosRespuesta>> listarRespuestas(Pageable pageable){
+    public ResponseEntity<Page<DatosRespuesta>> listarRespuestas(@Parameter(hidden = true) Pageable pageable){
         return ResponseEntity.ok(respuestaRepository.findAll(pageable).map(DatosRespuesta::new));
     }
 
